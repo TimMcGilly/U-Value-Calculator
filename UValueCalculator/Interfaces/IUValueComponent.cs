@@ -2,6 +2,6 @@
 {
     public interface IUValueComponent : IUValue
     {
-        double SurfaceArea { get; set; }
+        double SurfaceArea { get; }
     }
 }

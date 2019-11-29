@@ -22,15 +22,13 @@ namespace TestUValueCalculator
 
         [Theory]
         [ClassData(typeof(MultiLayerTestData))]
-        public void UValueMultiLayerTest(List<(Material,double)> layers, double expectedUValue)
+        public void UValueMultiLayerTest(List<(Material, double)> layers, double expectedUValue)
         {
             Wall wall = new Wall();
-            foreach ((Material,double) layer in layers)
+            foreach ((Material, double) layer in layers)
             {
                 wall.AddLayer(layer.Item1, layer.Item2);
-
             }
-
 
             Assert.Equal(expectedUValue, wall.CalculateUValue(), 3);
         }
