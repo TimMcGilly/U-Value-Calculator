@@ -3,13 +3,14 @@ using System.Linq;
 
 namespace UValueCalculator
 {
-    public abstract class SimpleUValueComponent : IUValue
+    public abstract class SimpleUValueComponent : IUValueComponent
     {
         public List<Layer> Layers { get; set; } = new List<Layer>();
+        public double SurfaceArea { get; set; }
 
         public void AddLayer(Material material, double thickness)
         {
-            Layers.Add(new Layer(material, thickness));
+            Layers.Add(new Layer(material, thickness, this));
         }
 
         public void RemoveLayer(Layer layer)
