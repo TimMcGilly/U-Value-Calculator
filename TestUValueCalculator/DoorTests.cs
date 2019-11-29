@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UValueCalculator;
 using UValueCalculator.UValueComponents;
 using Xunit;
@@ -13,7 +14,7 @@ namespace TestUValueCalculator
         [InlineData(5, 10, 0.5)]
         public void UValueSingleLayerTest(double conductivity, double thickness, double expectedUValue)
         {
-            Door door = new Door();
+            Door door = new Door(10);
             Material doorMaterial = new Material("doorMaterial", conductivity);
 
             door.AddLayer(doorMaterial, thickness);
@@ -23,15 +24,26 @@ namespace TestUValueCalculator
 
         [Theory]
         [ClassData(typeof(MultiLayerTestData))]
-        public void UValueMultiLayerTest(List<(Material,double)> layers, double expectedUValue)
+        public void UValueMultiLayerTest(List<(Material, double)> layers, double expectedUValue)
         {
-            Door door = new Door();
-            foreach ((Material,double) layer in layers)
+            Door door = new Door(10);
+            foreach ((Material, double) layer in layers)
             {
                 door.AddLayer(layer.Item1, layer.Item2);
             }
 
             Assert.Equal(expectedUValue, door.CalculateUValue(), 3);
+        }
+
+        [Fact]
+        public void DoorThrowsArugmentExcetionNegativeSurfaceArea()
+        {
+            Door door;
+
+            Assert.Throws<ArgumentException>(() =>
+            {
+                return door = new Door(-5);
+            });
         }
     }
 }

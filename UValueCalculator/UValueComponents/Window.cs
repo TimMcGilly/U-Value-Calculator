@@ -26,6 +26,10 @@ namespace UValueCalculator.UValueComponents
             }
         }
 
+        public Window()
+        {
+        }
+
         public Window(Panel panel, Frame frame, WindowSeal seal)
         {
             Panel = panel;

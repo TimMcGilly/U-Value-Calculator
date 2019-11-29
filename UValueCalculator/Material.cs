@@ -5,25 +5,25 @@
         public string Name { get; }
         public double Conductivity { get; }
 
-        public MaterialCompatibility Type { get; }
+        public MaterialCompatibility Compatibility { get; }
 
         public Material(string name, double conductivity, MaterialCompatibility type)
         {
             Name = name;
             Conductivity = conductivity;
-            Type = type;
+            Compatibility = type;
         }
 
         public Material(string name, double conductivity)
         {
             Name = name;
             Conductivity = conductivity;
-            Type = new MaterialCompatibility();
+            Compatibility = new MaterialCompatibility();
         }
 
         public bool CheckCompatibility(IUValueComponent uValueComponent)
         {
-            return Type.CheckCompatibility(uValueComponent);
+            return Compatibility.CheckCompatibility(uValueComponent);
         }
     }
 }

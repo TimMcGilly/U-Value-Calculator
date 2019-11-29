@@ -1,13 +1,15 @@
-﻿using System;
-using UValueCalculator;
+﻿using UValueCalculator;
+using Xunit;
 
-namespace UValueCalculatorConsole
+namespace TestUValueCalculator
 {
-    internal static class Program
+    public class BuildingTests
     {
-        private static void Main()
+        private readonly Material brick = new Material("Brick", 0.6);
+
+        [Fact]
+        public void SimpleTwoWallComponetsTest()
         {
-            Material brick = new Material("Brick", 0.6);
             Building building = new Building();
             Wall wall1 = new Wall(10);
             wall1.AddLayer(brick, 5);
@@ -17,7 +19,8 @@ namespace UValueCalculatorConsole
 
             building.AddComponent(wall1);
             building.AddComponent(wall2);
-            Console.WriteLine(building.CalculateUValue());
+
+            Assert.Equal(0.12, building.CalculateUValue());
         }
     }
 }

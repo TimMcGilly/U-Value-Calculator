@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UValueCalculator;
 using Xunit;
+using System;
+using UValueCalculator.UValueComponents;
 
 namespace TestUValueCalculator
 {
@@ -12,7 +14,7 @@ namespace TestUValueCalculator
         [InlineData(5, 10, 0.5)]
         public void UValueSingleLayerTest(double conductivity, double thickness, double expectedUValue)
         {
-            Wall wall = new Wall();
+            Wall wall = new Wall(10);
             Material wallMaterial = new Material("wallMaterial", conductivity);
 
             wall.AddLayer(wallMaterial, thickness);
@@ -24,7 +26,7 @@ namespace TestUValueCalculator
         [ClassData(typeof(MultiLayerTestData))]
         public void UValueMultiLayerTest(List<(Material, double)> layers, double expectedUValue)
         {
-            Wall wall = new Wall();
+            Wall wall = new Wall(10);
             foreach ((Material, double) layer in layers)
             {
                 wall.AddLayer(layer.Item1, layer.Item2);
@@ -32,5 +34,45 @@ namespace TestUValueCalculator
 
             Assert.Equal(expectedUValue, wall.CalculateUValue(), 3);
         }
+
+        [Fact]
+        public void WallThrowsArugmentExcetionNegativeSurfaceArea()
+        {
+            Wall wall;
+
+            Assert.Throws<ArgumentException>(() =>
+            {
+                return wall = new Wall(-5);
+            });
+
+        }
+
+        [Fact]
+        public void WallMaterialIncompatibleThrowException()
+        {
+            Wall wall = new Wall(10);
+            Material m1 = new Material("m1", 1);
+            m1.Compatibility.AddCompatibleComponentType(new Door(10));
+
+
+            var ex = Assert.Throws<ArgumentException>(() =>
+            {
+                wall.AddLayer(m1, 10);
+            });
+
+
+        }
+
+        [Fact]
+        public void NoLayersThrowsExceptionTest()
+        {
+            Wall wall = new Wall(10);
+
+            var ex = Assert.Throws<ArgumentException>(() =>
+            {
+                wall.CalculateUValue();
+            });
+        }
+
     }
 }

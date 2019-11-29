@@ -7,4 +7,8 @@
     <RootNamespace>UValueCalculatorConsole</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\UValueCalculator\UValueCalculator.csproj" />
+  </ItemGroup>
+
 </Project>
