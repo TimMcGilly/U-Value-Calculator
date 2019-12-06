@@ -6,15 +6,13 @@ namespace UValueCalculator
     public class Building : IUValue
     {
         public string Name { get; set; }
-        public List<IUValueComponent> Components { get => components; }
-
-        private readonly List<IUValueComponent> components = new List<IUValueComponent>();
+        public List<IUValueComponent> Components { get; } = new List<IUValueComponent>();
 
         public bool IsValid
         {
             get
             {
-                return components.Count > 1;
+                return Components.Count > 1;
             }
         }
 
@@ -25,7 +23,7 @@ namespace UValueCalculator
         public Building(string name, List<IUValueComponent> components)
         {
             Name = name;
-            this.components = components;
+            this.Components = components;
         }
 
         public Building(List<IUValueComponent> components) : this("Untitled Building", components)
@@ -34,12 +32,12 @@ namespace UValueCalculator
 
         public void AddComponent(IUValueComponent component)
         {
-            components.Add(component);
+            Components.Add(component);
         }
 
         public void RemoveComponent(IUValueComponent component)
         {
-            components.Remove(component);
+            Components.Remove(component);
         }
 
         public double CalculateUValue()
@@ -50,6 +48,7 @@ namespace UValueCalculator
 
             foreach (IUValueComponent component in Components)
             {
+                double temp = component.CalculateUValue();
                 totalCombined += component.CalculateUValue() * component.SurfaceArea;
                 totalSurfaceArea += component.SurfaceArea;
             }

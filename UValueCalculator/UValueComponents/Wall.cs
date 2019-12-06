@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace UValueCalculator
+﻿namespace UValueCalculator.UValueComponents
 {
     public class Wall : SimpleUValueComponent
     {
@@ -12,7 +10,8 @@ namespace UValueCalculator
             SurfaceArea = surfaceArea;
         }
 
-        public Wall(double surfaceArea) : this("Untitled Wall", surfaceArea) { }
-
+        public Wall(double surfaceArea) : this("Untitled Wall", surfaceArea)
+        {
+        }
     }
 }
