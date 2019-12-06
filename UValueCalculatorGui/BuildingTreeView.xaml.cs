@@ -9,7 +9,6 @@ namespace UValueCalculatorGui
     {
         public BuildingTreeView()
         {
-            this.DataContext = new BuildingTreeViewModel();
             InitializeComponent();
         }
     }

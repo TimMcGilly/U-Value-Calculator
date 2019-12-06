@@ -4,12 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:UValueCalculatorGui"
+             xmlns:VM="clr-namespace:UValueCalculatorGui"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TreeView  Name="Building">
-            
+        <TreeView Name="Building" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate DataType="{x:Type VM:BuildingViewModel}" ItemsSource="{Binding LayeredComponents}">
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Layers}" DataType="{x:Type VM:LayeredComponentViewModel}">
+                            <Label Content="{Binding Component.Name}"/>
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <DataTemplate DataType="{x:Type VM:LayerViewModel}">
+                                    <Label Content="{Binding EmployeeName}"/>
+                                </DataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
+                        </HierarchicalDataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
         </TreeView>
-
     </Grid>
 </UserControl>

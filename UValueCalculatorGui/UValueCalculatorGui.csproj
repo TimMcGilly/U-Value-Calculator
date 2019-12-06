@@ -55,6 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BuildingViewModel.cs" />
+    <Compile Include="LayeredComponentViewModel.cs" />
+    <Compile Include="LayerViewModel.cs" />
+    <Compile Include="ViewModelBase.cs" />
+    <Compile Include="WindowViewModel.cs" />
     <Page Include="BuildingTreeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -70,7 +75,6 @@
     <Compile Include="BuildingTreeView.xaml.cs">
       <DependentUpon>BuildingTreeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BuildingTreeViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -101,6 +105,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UValueCalculator\UValueCalculator.csproj">
+      <Project>{29d564f7-adb1-48dc-8bd1-7c16df56da3d}</Project>
+      <Name>UValueCalculator</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
