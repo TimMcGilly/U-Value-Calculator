@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Collections.Generic;
+using System.Windows.Controls;
+using UValueCalculatorGui.Repositories;
 
 namespace UValueCalculatorGui
 {
@@ -9,6 +11,9 @@ namespace UValueCalculatorGui
     {
         public BuildingTreeView()
         {
+            BuildingRepository buildingRepository = new BuildingRepository();
+            BuildingViewModel buildingViewModel =new BuildingViewModel( buildingRepository.GetBuildingFromXMLFile("test"));
+            this.DataContext = new BuildingsTreeViewModel(new List<BuildingViewModel>() { buildingViewModel});
             InitializeComponent();
         }
     }

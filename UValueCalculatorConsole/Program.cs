@@ -1,5 +1,6 @@
 ﻿using System;
 using UValueCalculator;
+using UValueCalculator.UValueComponents;
 
 namespace UValueCalculatorConsole
 {
