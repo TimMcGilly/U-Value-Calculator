@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UValueCalculator;
-using Xunit;
-using System;
 using UValueCalculator.UValueComponents;
+using Xunit;
 
 namespace TestUValueCalculator
 {
@@ -40,11 +40,7 @@ namespace TestUValueCalculator
         {
             Wall wall;
 
-            Assert.Throws<ArgumentException>(() =>
-            {
-                return wall = new Wall(-5);
-            });
-
+            Assert.Throws<ArgumentException>(() => wall = new Wall(-5));
         }
 
         [Fact]
@@ -54,13 +50,7 @@ namespace TestUValueCalculator
             Material m1 = new Material("m1", 1);
             m1.Compatibility.AddCompatibleComponentType(new Door(10));
 
-
-            var ex = Assert.Throws<ArgumentException>(() =>
-            {
-                wall.AddLayer(m1, 10);
-            });
-
-
+            Assert.Throws<ArgumentException>(() => wall.AddLayer(m1, 10));
         }
 
         [Fact]
@@ -68,11 +58,7 @@ namespace TestUValueCalculator
         {
             Wall wall = new Wall(10);
 
-            var ex = Assert.Throws<ArgumentException>(() =>
-            {
-                wall.CalculateUValue();
-            });
+            Assert.Throws<ArgumentException>(() => wall.CalculateUValue());
         }
-
     }
 }

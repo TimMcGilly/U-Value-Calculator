@@ -5,7 +5,7 @@ namespace UValueCalculator
 {
     public class MaterialCompatibility
     {
-        private HashSet<Type> compatibleComponents = new HashSet<Type>();
+        private readonly HashSet<Type> compatibleComponents = new HashSet<Type>();
 
         public bool Unrestricted
         {
