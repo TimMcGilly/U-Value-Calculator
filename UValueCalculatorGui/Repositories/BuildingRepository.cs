@@ -35,6 +35,7 @@ namespace UValueCalculatorGui.Repositories
             building.AddComponent(wall1);
             building.AddComponent(window);
             building.AddComponent(door1);
+            building.AddComponent(door1);
 
             return building;
         }

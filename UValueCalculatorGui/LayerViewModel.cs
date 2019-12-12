@@ -2,7 +2,7 @@
 
 namespace UValueCalculatorGui
 {
-    public class LayerViewModel : ViewModelBase
+    public class LayerViewModel : TreeViewItem
     {
         public Layer Layer { get; protected set; }
 

@@ -1,29 +1,46 @@
 ﻿<UserControl x:Class="UValueCalculatorGui.BuildingTreeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:UValueCalculatorGui"
              xmlns:VM="clr-namespace:UValueCalculatorGui"
-             mc:Ignorable="d" 
+             xmlns:UValue="clr-namespace:UValueCalculator.UValueComponents;assembly=UValueCalculator"
+
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TreeView Name="Building" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch" ItemsSource="{Binding Buildings}">
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate DataType="{x:Type local:BuildingViewModel}" ItemsSource="{Binding LayeredComponents}">
-                    <Label Content="{Binding CurrentBuilding.Name}"/>
+        <TreeView Name="Building" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch" ItemsSource="{Binding}">
+            
+            <TreeView.Resources>
+                <HierarchicalDataTemplate ItemsSource="{Binding Layers}" DataType="{x:Type VM:LayeredComponentViewModel}">
+                    <Label Content="{Binding Name}" />
                     <HierarchicalDataTemplate.ItemTemplate>
+                        <DataTemplate DataType="{x:Type VM:LayerViewModel}">
+                            <Label Content="{Binding Name}" />
+                        </DataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+
+                <HierarchicalDataTemplate ItemsSource="{Binding Components}" DataType="{x:Type VM:WindowViewModel}">
+                    <Label Content="{Binding Component.Name}" />
+                    <HierarchicalDataTemplate.Resources>
                         <HierarchicalDataTemplate ItemsSource="{Binding Layers}" DataType="{x:Type VM:LayeredComponentViewModel}">
-                            <Label Content="{Binding Component.Name}"/>
+                            <Label Content="{Binding Name}" />
                             <HierarchicalDataTemplate.ItemTemplate>
                                 <DataTemplate DataType="{x:Type VM:LayerViewModel}">
-                                    <Label Content="{Binding Name}"/>
+                                    <Label Content="{Binding Name}" />
                                 </DataTemplate>
                             </HierarchicalDataTemplate.ItemTemplate>
                         </HierarchicalDataTemplate>
-                    </HierarchicalDataTemplate.ItemTemplate>
+                        
+                        <HierarchicalDataTemplate DataType="{x:Type UValue:WindowSeal}">
+                            <Label Content="Seal"/>
+                        </HierarchicalDataTemplate>
+                        
+                    </HierarchicalDataTemplate.Resources>
                 </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
+            </TreeView.Resources>
         </TreeView>
     </Grid>
 </UserControl>

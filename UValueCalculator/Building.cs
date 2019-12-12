@@ -18,6 +18,7 @@ namespace UValueCalculator
 
         public Building()
         {
+            Name = "Untitled Building";
         }
 
         public Building(string name, List<IUValueComponent> components)
@@ -48,7 +49,6 @@ namespace UValueCalculator
 
             foreach (IUValueComponent component in Components)
             {
-                double temp = component.CalculateUValue();
                 totalCombined += component.CalculateUValue() * component.SurfaceArea;
                 totalSurfaceArea += component.SurfaceArea;
             }

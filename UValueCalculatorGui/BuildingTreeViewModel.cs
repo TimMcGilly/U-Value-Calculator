@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using UValueCalculator;
 using UValueCalculator.UValueComponents;
 
 namespace UValueCalculatorGui
 {
-    public class BuildingViewModel
+    public class BuildingTreeViewModel
     {
         public Building CurrentBuilding { get; set; }
 
-        public BuildingViewModel(Building building)
+        public BuildingTreeViewModel(Building building)
         {
             CurrentBuilding = building;
         }
@@ -41,6 +42,18 @@ namespace UValueCalculatorGui
                 }
 
                 return viewModels;
+            }
+        }
+
+        public List<object> Components
+        {
+            get
+            {
+                List<object> o = new List<object>();
+
+                o.AddRange(LayeredComponents.ToArray());
+                o.AddRange(WindowComponents.ToArray());
+                return o;
             }
         }
     }

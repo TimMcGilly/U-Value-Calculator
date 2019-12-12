@@ -3,13 +3,38 @@ using UValueCalculator;
 
 namespace UValueCalculatorGui
 {
-    public class LayeredComponentViewModel : ViewModelBase
+    public class LayeredComponentViewModel : TreeViewItem
     {
         public IUValueLayeredComponent Component { get; set; }
 
         public LayeredComponentViewModel(IUValueLayeredComponent component)
         {
             Component = component;
+            
+        }
+
+        public LayeredComponentViewModel(IUValueLayeredComponent component, string name)
+        {
+            Component = component;
+            this.name = name;
+        }
+
+        private string name = "";
+
+        public string Name
+        {
+            get
+            {
+
+                if (!string.IsNullOrEmpty(name))
+                {
+                    return name;
+                }
+                else
+                {
+                    return Component.Name.ToString();
+                }
+            }
         }
 
         public List<LayerViewModel> Layers

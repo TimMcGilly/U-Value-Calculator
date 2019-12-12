@@ -55,11 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BuildingsTreeViewModel.cs" />
-    <Compile Include="BuildingViewModel.cs" />
+    <Compile Include="BuildingTreeViewModel.cs" />
     <Compile Include="LayeredComponentViewModel.cs" />
     <Compile Include="LayerViewModel.cs" />
     <Compile Include="Repositories\BuildingRepository.cs" />
+    <Compile Include="TreeViewItem.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="WindowViewModel.cs" />
     <Page Include="BuildingTreeView.xaml">
