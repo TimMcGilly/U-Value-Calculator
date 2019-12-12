@@ -10,7 +10,6 @@ namespace UValueCalculatorGui
         public LayeredComponentViewModel(IUValueLayeredComponent component)
         {
             Component = component;
-            
         }
 
         public LayeredComponentViewModel(IUValueLayeredComponent component, string name)
@@ -19,7 +18,7 @@ namespace UValueCalculatorGui
             this.name = name;
         }
 
-        private string name = "";
+        private string name = null;
 
         public string Name
         {
@@ -32,8 +31,20 @@ namespace UValueCalculatorGui
                 }
                 else
                 {
-                    return Component.Name.ToString();
+                    return Component.Name;
                 }
+            }
+            set
+            {
+                if (name != null)
+                {
+                    name = value;
+                }
+                else
+                {
+                    Component.Name = name;
+                }
+                OnPropertyChanged("Name");
             }
         }
 
@@ -44,7 +55,7 @@ namespace UValueCalculatorGui
                 List<LayerViewModel> viewModels = new List<LayerViewModel>();
                 foreach (Layer layer in Component.Layers)
                 {
-                    viewModels.Add(new LayerViewModel(layer));
+                    viewModels.Add(new LayerViewModel(layer, this));
                 }
 
                 return viewModels;
@@ -58,6 +69,19 @@ namespace UValueCalculatorGui
                 }
                 Component.Layers = layers;
                 OnPropertyChanged("Layers");
+            }
+        }
+
+        public LayerViewModel SelectedLayer
+        {
+            get
+            {
+                if (this.IsSelected) return null;
+                foreach (LayerViewModel layer in Layers)
+                {
+                    if (layer.IsSelected) return layer;
+                }
+                return null;
             }
         }
     }

@@ -4,7 +4,7 @@ namespace UValueCalculator
 {
     public interface IUValueComponent : IUValue
     {
-        string Name { get; }
+        string Name { get; set; }
         double SurfaceArea { get; }
     }
 

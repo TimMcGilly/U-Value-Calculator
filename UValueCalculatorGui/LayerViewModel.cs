@@ -4,6 +4,8 @@ namespace UValueCalculatorGui
 {
     public class LayerViewModel : TreeViewItem
     {
+        public LayeredComponentViewModel Parent { get; set; }
+
         public Layer Layer { get; protected set; }
 
         public string Name
@@ -16,9 +18,10 @@ namespace UValueCalculatorGui
             }
         }
 
-        public LayerViewModel(Layer layer)
+        public LayerViewModel(Layer layer, LayeredComponentViewModel parent)
         {
             Layer = layer;
+            Parent = parent;
         }
     }
 }

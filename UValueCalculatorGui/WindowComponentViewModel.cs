@@ -3,13 +3,21 @@ using UValueCalculator.UValueComponents;
 
 namespace UValueCalculatorGui
 {
-    public class WindowViewModel : TreeViewItem
+    public class WindowComponentViewModel : TreeViewItem
     {
         public Window Component { get; set; }
 
-        public WindowViewModel(Window component)
+        public WindowComponentViewModel(Window component)
         {
             Component = component;
+        }
+
+        public string Name
+        {
+            get
+            {
+                return Component.Name;
+            }
         }
 
         public LayeredComponentViewModel Frame

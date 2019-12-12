@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UValueCalculatorGui
+﻿namespace UValueCalculatorGui
 {
-    public class TreeViewItem: ViewModelBase
+    public class TreeViewItem : ViewModelBase
     {
-        protected bool _isSelected = false;
+        protected bool _isSelected;
+
         public bool IsSelected
         {
             get { return _isSelected; }

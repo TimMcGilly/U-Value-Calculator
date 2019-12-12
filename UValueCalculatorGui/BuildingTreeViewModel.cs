@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using UValueCalculator;
 using UValueCalculator.UValueComponents;
 
 namespace UValueCalculatorGui
 {
-    public class BuildingTreeViewModel
+    public class BuildingTreeViewModel: ViewModelBase
     {
         public Building CurrentBuilding { get; set; }
 
@@ -30,15 +29,15 @@ namespace UValueCalculatorGui
             }
         }
 
-        public List<WindowViewModel> WindowComponents
+        public List<WindowComponentViewModel> WindowComponents
         {
             get
             {
-                List<WindowViewModel> viewModels = new List<WindowViewModel>();
+                List<WindowComponentViewModel> viewModels = new List<WindowComponentViewModel>();
                 IEnumerable<IUValueComponent> windowComponents = CurrentBuilding.Components.Where(x => x is Window);
                 foreach (IUValueComponent windowComponent in windowComponents)
                 {
-                    viewModels.Add(new WindowViewModel((Window)windowComponent));
+                    viewModels.Add(new WindowComponentViewModel((Window)windowComponent));
                 }
 
                 return viewModels;
