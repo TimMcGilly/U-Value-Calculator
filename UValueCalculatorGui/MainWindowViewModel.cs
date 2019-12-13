@@ -1,4 +1,6 @@
-﻿namespace UValueCalculatorGui
+﻿using UValueCalculatorGui.Repositories;
+
+namespace UValueCalculatorGui
 {
     public class MainWindowViewModel : ViewModelBase
     {
@@ -9,6 +11,9 @@
         public MainWindowViewModel()
         {
             DisplayViewModel = new RelayCommand<ViewModelBase>(OnDisplayViewModel);
+            BuildingRepository buildingRepository = new BuildingRepository();
+            BuildingTreeViewModel buildingViewModel = new BuildingTreeViewModel(buildingRepository.GetBuildingFromXMLFile("test"));
+            Building = buildingViewModel;
         }
 
         public ViewModelBase CurrentViewModel
@@ -16,7 +21,6 @@
             get { return _CurrentViewModel; }
             set
             {
-                if (object.Equals(_CurrentViewModel, value)) return;
                 _CurrentViewModel = value;
                 OnPropertyChanged("CurrentViewModel");
             }
@@ -29,6 +33,11 @@
                 viewModel = ((LayerViewModel)viewModel).Parent;
             }
             CurrentViewModel = viewModel;
+        }
+
+        public BuildingTreeViewModel Building
+        {
+            get;
         }
     }
 }

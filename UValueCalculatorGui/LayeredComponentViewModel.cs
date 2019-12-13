@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UValueCalculator;
+using UValueCalculatorGui.Repositories;
 
 namespace UValueCalculatorGui
 {
@@ -7,15 +9,19 @@ namespace UValueCalculatorGui
     {
         public IUValueLayeredComponent Component { get; set; }
 
+        private List<LayerViewModel> layerViewModels;
+
         public LayeredComponentViewModel(IUValueLayeredComponent component)
         {
             Component = component;
+            PopulateLayerViewModels();
         }
 
         public LayeredComponentViewModel(IUValueLayeredComponent component, string name)
         {
             Component = component;
             this.name = name;
+            PopulateLayerViewModels();
         }
 
         private string name = null;
@@ -24,7 +30,6 @@ namespace UValueCalculatorGui
         {
             get
             {
-
                 if (!string.IsNullOrEmpty(name))
                 {
                     return name;
@@ -52,31 +57,33 @@ namespace UValueCalculatorGui
         {
             get
             {
-                List<LayerViewModel> viewModels = new List<LayerViewModel>();
-                foreach (Layer layer in Component.Layers)
-                {
-                    viewModels.Add(new LayerViewModel(layer, this));
-                }
-
-                return viewModels;
+                return layerViewModels;
             }
             set
             {
-                List<Layer> layers = new List<Layer>();
-                foreach (LayerViewModel layer in value)
-                {
-                    layers.Add(layer.Layer);
-                }
-                Component.Layers = layers;
+                layerViewModels = value;
                 OnPropertyChanged("Layers");
             }
         }
 
-        public LayerViewModel SelectedLayer
+        public ObservableCollection<LayerViewModel> SelectedLayer
         {
             get
             {
-                if (this.IsSelected) return null;
+                if (this.IsSelected) return default(ObservableCollection<LayerViewModel>);
+                foreach (LayerViewModel layer in Layers)
+                {
+                    if (layer.IsSelected) return new ObservableCollection<LayerViewModel>() { layer };
+                }
+                return default(ObservableCollection<LayerViewModel>);
+            }
+        }
+
+        public object SelectedObject
+        {
+            get
+            {
+                if (this.IsSelected) return this;
                 foreach (LayerViewModel layer in Layers)
                 {
                     if (layer.IsSelected) return layer;
@@ -84,5 +91,17 @@ namespace UValueCalculatorGui
                 return null;
             }
         }
+
+        public void PopulateLayerViewModels()
+        {
+            List<LayerViewModel> viewModels = new List<LayerViewModel>();
+            foreach (Layer layer in Component.Layers)
+            {
+                viewModels.Add(new LayerViewModel(layer, this));
+            }
+            Layers = viewModels;
+        }
+
+        
     }
 }

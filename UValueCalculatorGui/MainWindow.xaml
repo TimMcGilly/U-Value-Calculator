@@ -20,8 +20,14 @@
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
-        
-        <local:BuildingTreeView Grid.Column="0"></local:BuildingTreeView>
-        <ContentControl Grid.Column="1" Content="{Binding CurrentViewModel}" />
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <local:BuildingTreeView Grid.Column="0" Grid.Row="0"  BuildingView="{Binding Building}"></local:BuildingTreeView>
+        <ContentControl Grid.Column="1" Grid.Row="0" Content="{Binding CurrentViewModel}" />
+        <TextBlock Grid.Row="1" Text="{Binding Building.UValue}"></TextBlock>
     </Grid>
 </Window>

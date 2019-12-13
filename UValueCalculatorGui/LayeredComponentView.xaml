@@ -4,12 +4,46 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:UValueCalculatorGui"
+                     xmlns:VM="clr-namespace:UValueCalculatorGui"
+
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type VM:LayerViewModel}">
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label>Name:</Label>
+                <TextBox Grid.Column="1" Margin="0,0,0,10" Text="{Binding Name}"/>
+                <Label Grid.Row="1">Thickness:</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,10" Text="{Binding Thickness}"/>
+                <Label Grid.Row="2">Material:</Label>
+                <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Materials}" SelectedItem="{Binding Material}" IsSynchronizedWithCurrentItem="True">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Name}"></Label>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                
+            </Grid>
+
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type VM:LayeredComponentViewModel}">
+            <TextBlock Text="Layered Component"></TextBlock>
+        </DataTemplate>
+    </UserControl.Resources>
+
     <Grid>
 
-        <DataGrid ItemsSource="{Binding SelectedLayer}" Padding="100">
-            <TextBlock Text="{Binding Name}"></TextBlock>
-        </DataGrid>
+        <ContentControl Content="{Binding SelectedObject }" />
+
     </Grid>
 </UserControl>

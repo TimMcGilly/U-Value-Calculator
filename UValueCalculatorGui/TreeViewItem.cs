@@ -13,6 +13,7 @@
                 {
                     _isSelected = value;
                     this.OnPropertyChanged("IsSelected");
+                    this.OnPropertyChanged("SelectedLayer");
                 }
             }
         }

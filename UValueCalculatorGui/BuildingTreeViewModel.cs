@@ -14,6 +14,14 @@ namespace UValueCalculatorGui
             CurrentBuilding = building;
         }
 
+        public double UValue
+        {
+            get
+            {
+                return CurrentBuilding.CalculateUValue();
+            }
+        }
+
         public List<LayeredComponentViewModel> LayeredComponents
         {
             get
