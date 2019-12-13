@@ -58,5 +58,19 @@ namespace UValueCalculatorGui
                 OnPropertyChanged("Material");
             }
         }
+
+
+        public override bool IsSelected
+        {
+            get
+            {
+                return base._isSelected;
+            }
+            set
+            {
+                base._isSelected = value;
+                Parent.OnPropertyChanged("SelectedObject");
+            }
+        }
     }
 }

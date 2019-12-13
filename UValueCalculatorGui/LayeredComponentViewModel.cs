@@ -110,7 +110,7 @@ namespace UValueCalculatorGui
             }
         }
 
-        public bool IsSelected
+        public override bool IsSelected
         {
             get
             {
@@ -119,6 +119,7 @@ namespace UValueCalculatorGui
             set
             {
                 base._isSelected = value;
+                OnPropertyChanged("SelectedObject");
             }
         }
     }
