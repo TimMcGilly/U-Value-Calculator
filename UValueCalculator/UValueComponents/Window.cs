@@ -4,6 +4,8 @@ namespace UValueCalculator.UValueComponents
 {
     public class Window : IUValueComponent
     {
+        public string Name { get; set; }
+
         public double SurfaceArea
         {
             get
@@ -28,10 +30,16 @@ namespace UValueCalculator.UValueComponents
 
         public Window()
         {
+            Name = "Untitled Window";
         }
 
-        public Window(Panel panel, Frame frame, WindowSeal seal)
+        public Window(Panel panel, Frame frame, WindowSeal seal) : this("Untitled Window", panel, frame, seal)
         {
+        }
+
+        public Window(string name, Panel panel, Frame frame, WindowSeal seal)
+        {
+            Name = name;
             Panel = panel;
             Frame = frame;
             Seal = seal;

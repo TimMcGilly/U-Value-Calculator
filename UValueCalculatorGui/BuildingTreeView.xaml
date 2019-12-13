@@ -1,15 +1,65 @@
 ﻿<UserControl x:Class="UValueCalculatorGui.BuildingTreeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:UValueCalculatorGui"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:VM="clr-namespace:UValueCalculatorGui"
+             xmlns:UValue="clr-namespace:UValueCalculator.UValueComponents;assembly=UValueCalculator"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d"
+             >
+   
     <Grid>
-        <TreeView  Name="Building">
-            
-        </TreeView>
+        <TreeView Name="Building" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch" ItemsSource="{Binding}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectedItemChanged">
+                    <i:InvokeCommandAction CommandParameter="{Binding ElementName=Building, Path=SelectedItem}" Command="{Binding DataContext.DisplayViewModel, RelativeSource=
+            {RelativeSource AncestorType={x:Type VM:MainWindow}}, Mode=OneWay}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
 
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="{x:Type TreeViewItem}">
+                <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                <Setter Property="FontWeight" Value="Normal" />
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="FontWeight" Value="Bold" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            </TreeView.ItemContainerStyle>
+        
+            <TreeView.Resources>
+                <HierarchicalDataTemplate ItemsSource="{Binding Layers}" DataType="{x:Type VM:LayeredComponentViewModel}">
+                    <Label Content="{Binding Name}" />
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <DataTemplate DataType="{x:Type VM:LayerViewModel}">
+                            <Label Content="{Binding Name}" />
+                        </DataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+
+                <HierarchicalDataTemplate ItemsSource="{Binding Components}" DataType="{x:Type VM:WindowComponentViewModel}">
+                    <Label Content="{Binding Component.Name}" />
+                    <HierarchicalDataTemplate.Resources>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Layers}" DataType="{x:Type VM:LayeredComponentViewModel}">
+                            <Label Content="{Binding Name}" />
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <DataTemplate DataType="{x:Type VM:LayerViewModel}">
+                                    <Label Content="{Binding Name}" />
+                                </DataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
+                        </HierarchicalDataTemplate>
+                        
+                        <HierarchicalDataTemplate DataType="{x:Type UValue:WindowSeal}">
+                            <Label Content="Seal"/>
+                        </HierarchicalDataTemplate>
+                        
+                    </HierarchicalDataTemplate.Resources>
+                </HierarchicalDataTemplate>
+            </TreeView.Resources>
+        </TreeView>
     </Grid>
 </UserControl>

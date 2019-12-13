@@ -4,11 +4,14 @@ using System.Linq;
 
 namespace UValueCalculator
 {
-    public abstract class SimpleUValueComponent : IUValueComponent
+    public abstract class SimpleUValueComponent : IUValueLayeredComponent
     {
+        public string Name { get; set; }
+
         public List<Layer> Layers { get; set; } = new List<Layer>();
 
         private double surfaceArea;
+
         public double SurfaceArea
         {
             get => surfaceArea;
@@ -42,7 +45,5 @@ namespace UValueCalculator
             if (!IsValid) throw new ArgumentException("Component must have layers.");
             return 1 / Layers.Sum(layer => layer.GetRValue());
         }
-
-        
     }
 }

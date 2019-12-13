@@ -2,7 +2,6 @@
 {
     public class Door : SimpleUValueComponent
     {
-        public string Name { get; set; }
 
         public Door(string name, double surfaceArea)
         {
