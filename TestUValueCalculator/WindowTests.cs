@@ -7,7 +7,7 @@ namespace TestUValueCalculator
 {
     public class WindowTests
     {
-        private readonly Material glass = new Material("Glass", 0.91);
+        private readonly Material glass = new Material("Glass", 0.91, new MaterialCompatibility(typeof(Panel)));
         private readonly Material aluminium = new Material("Aluminium", 0.61);
 
         [Fact]

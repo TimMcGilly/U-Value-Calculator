@@ -42,7 +42,7 @@ namespace UValueCalculatorGui
             get
             {
                 MaterialRepository materialRepository = new MaterialRepository();
-                return new ObservableCollection<Material>(materialRepository.GetMaterials());
+                return new ObservableCollection<Material>(materialRepository.GetCompatibleMaterials(Parent.Component));
             }
         }
 

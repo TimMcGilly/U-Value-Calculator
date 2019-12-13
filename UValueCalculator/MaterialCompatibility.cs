@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace UValueCalculator
 {
@@ -27,10 +28,25 @@ namespace UValueCalculator
             }
         }
 
+        public MaterialCompatibility(params Type[] componentsType)
+        {
+            foreach (Type type in componentsType)
+            {
+                compatibleComponents.Add(type);
+            } 
+        }
+
         public bool CheckCompatibility(IUValueComponent uValueComponent)
         {
             if (Unrestricted) return true;
             return compatibleComponents.Contains(uValueComponent.GetType());
+        }
+
+        public bool CheckCompatibility(Type type)
+        {
+
+                return compatibleComponents.Contains(type);
+             
         }
 
         public void AddCompatibleComponentType(IUValueComponent component)
