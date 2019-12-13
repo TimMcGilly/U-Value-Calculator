@@ -4,7 +4,7 @@
     {
         protected bool _isSelected;
 
-        public bool IsSelected
+        public virtual bool IsSelected
         {
             get { return _isSelected; }
             set
@@ -13,7 +13,7 @@
                 {
                     _isSelected = value;
                     this.OnPropertyChanged("IsSelected");
-                    this.OnPropertyChanged("SelectedLayer");
+                    this.OnPropertyChanged("SelectedObject");
                 }
             }
         }

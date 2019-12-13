@@ -28,6 +28,6 @@
 
         <local:BuildingTreeView Grid.Column="0" Grid.Row="0"  BuildingView="{Binding Building}"></local:BuildingTreeView>
         <ContentControl Grid.Column="1" Grid.Row="0" Content="{Binding CurrentViewModel}" />
-        <TextBlock Grid.Row="1" Text="{Binding Building.UValue}"></TextBlock>
+        <TextBlock Grid.Row="1" Text="{Binding Building.UValue, StringFormat='Building U-Value: {0}'}"></TextBlock>
     </Grid>
 </Window>

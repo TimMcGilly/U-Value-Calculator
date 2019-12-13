@@ -102,6 +102,24 @@ namespace UValueCalculatorGui
             Layers = viewModels;
         }
 
-        
+        public double UValue
+        {
+            get
+            {
+                return Component.CalculateUValue();
+            }
+        }
+
+        public bool IsSelected
+        {
+            get
+            {
+                return base._isSelected;
+            }
+            set
+            {
+                base._isSelected = value;
+            }
+        }
     }
 }

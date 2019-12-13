@@ -33,6 +33,7 @@ namespace UValueCalculatorGui
                 viewModel = ((LayerViewModel)viewModel).Parent;
             }
             CurrentViewModel = viewModel;
+            Building.OnPropertyChanged("UValue");
         }
 
         public BuildingTreeViewModel Building

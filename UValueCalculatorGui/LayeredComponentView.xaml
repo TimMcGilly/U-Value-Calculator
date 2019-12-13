@@ -37,7 +37,7 @@
 
         </DataTemplate>
         <DataTemplate DataType="{x:Type VM:LayeredComponentViewModel}">
-            <TextBlock Text="Layered Component"></TextBlock>
+            <TextBlock Text="{Binding UValue, StringFormat='Component U-Value {0}'}"></TextBlock>
         </DataTemplate>
     </UserControl.Resources>
 
